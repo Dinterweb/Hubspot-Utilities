@@ -1,0 +1,25 @@
+<!--
+Este listener obtiene todos los parámetros de los campos del form, definirmos el campo del correo en la variable setEmail y hacemos la redirección de la página donde ocupamos enviar ese parámetro
+Importante, en la edicion del LP, usar la opción de mostrar mensaje de agradecimiento en lugar de la redirección
+Fuente: https://developers.hubspot.com/global-form-events
+-->
+<script>
+window.addEventListener('message', event => {
+   if(event.data.eventName === 'onFormSubmit') {
+     //Obtenemos todos los campos
+     getFields = event.data.data;
+     //Inicializamos la variable del correo
+     var setEmail = '';
+     //Y buscamos entre todos los campos buscando el correo, y agregamos el valor del correo
+     for (var i = 0; i < getFields.length; i++) {
+       console.log(getFields[i].name);
+       if ( getFields[i].name == 'email' ){
+           setEmail = getFields[i].value;
+       }
+     }
+     //console.log(setEmail);
+     //Finalmente, redirigimos a la página deseada con el correo como parámetro
+     window.location = "https://apartamentos.culebrasgroup.com/gracias?email=" + setEmail;
+   }
+});
+</script>
